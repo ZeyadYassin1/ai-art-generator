@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import { motion } from "framer-motion";
 
-const API_KEY = "sk-2N0AIEdYFMuioJheJgHkwz31ZgZ7jQ5t23rDIIsHkA0Sj3iu";
+const API_KEY = "sk-2N0AIEdYFMuioJheJgHkwz31ZgZ7jQ5t23rDIIsHkA0Sj3iu"; //sk-0n7aCRFLs5HMdyTKzoyMMfiwk7yRa5fLDh0soxlHyH92eELt
 const randomPrompts = [
   "A peaceful beach during sunset",
   "A cozy coffee shop on a rainy day",
@@ -109,7 +109,13 @@ function App() {
       randomPrompts[Math.floor(Math.random() * randomPrompts.length)];
     setPrompt(random);
   };
-
+  const saveImage = () => {
+    if (!image) return;
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "ai-art.png";
+    link.click();
+  };
   const clearHistory = () => {
     setPromptHistory([]);
     localStorage.removeItem("promptHistory");
@@ -175,6 +181,14 @@ function App() {
             onClick={surprisePrompt}
           >
             ✨ Surprise Me
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            className="bg-[#ffc75f] text-black px-6 py-3 rounded-lg shadow-md"
+            onClick={saveImage}
+          >
+            💾 Save Image
           </motion.button>
 
           <motion.button
